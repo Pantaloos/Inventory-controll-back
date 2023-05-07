@@ -8,7 +8,7 @@ interface itemAtributes{
   price: number;
 }
 
-module.exports = (sequelize: any) => {
+export default (sequelize: any) => {
   class Item extends Model<itemAtributes> implements itemAtributes {
     /**
      * Helper method for defining associations.
