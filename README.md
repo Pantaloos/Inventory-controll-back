@@ -11,9 +11,8 @@ npm install
 
 ## Set database
 
-```fill .env.example
-rename .env.example to .env
-```
+copy .env.example to .env
+fill .env
 
 ## Launch the project
 
