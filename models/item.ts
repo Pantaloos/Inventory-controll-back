@@ -1,7 +1,8 @@
-'use strict';
-import { Model, UUIDV4, DataTypes } from "sequelize";
+"use strict";
+import { Model, UUIDV4, DataTypes, NUMBER, STRING } from "sequelize";
+import { validate } from "uuid";
 
-interface itemAtributes{
+interface itemAtributes {
   id: string;
   name: string;
   location: string;
@@ -23,29 +24,46 @@ export default (sequelize: any) => {
       // define association here
     }
   }
-  Item.init({
-    id:{
-      type: DataTypes.UUID,
-      defaultValue: UUIDV4,
-      allowNull: false,
-      primaryKey: true,
-      unique: true
+  Item.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+        unique: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: [
+            [
+              "Main Office",
+              "Cavea Gallery",
+              "Cavea Tbilisi Mall",
+              "Cavea East Point",
+              "Cavea City Mall",
+            ],
+          ],
+        },
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isNumeric: true,
+        },
+      },
     },
-    name:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    location:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    price:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+    {
+      sequelize,
+      modelName: "Item",
     }
-  }, {
-    sequelize,
-    modelName: 'Item',
-  });
+  );
   return Item;
 };
