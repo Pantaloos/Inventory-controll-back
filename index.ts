@@ -25,14 +25,13 @@ app.get("/inventory/:page", async (req, res) => {
 });
 
 app.post("/inventory", async (req, res) => {
-  console.log(req);
   const { location, name, price } = req.body;
 
   try {
     const result = await db.Item.create({ location, name, price });
     res.json(result);
   } catch (error) {
-    res.json(error);
+    res.status(400);
   }
 });
 
