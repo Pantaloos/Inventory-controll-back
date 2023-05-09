@@ -15,14 +15,14 @@ npm install
 rename .env.example to .env
 ```
 
-## Seed the database
-
-```properties
-npx sequelize-cli db:seed:all
-```
-
 ## Launch the project
 
 ```properties
 npm run dev
+```
+
+## Seed the database
+
+```properties
+npx sequelize-cli db:seed:all
 ```
